@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+#slider {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+/* Hide scrollbar for other browsers */
+/* stylelint-disable selector-type-no-unknown */
+#slider::-webkit-scrollbar {
+  width: 5px; /* Adjust the width as needed */
+}
+
+#slider::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
