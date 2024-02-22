@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 import Movie from './Movie';
 const Row = ({ title, fetchUrl }) => {
@@ -25,7 +26,11 @@ const Row = ({ title, fetchUrl }) => {
           className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative'
         >
           {movies.map((movie) => (
-            <Movie key={movie.id} movie={movie} />
+            <>
+              <Link to={`/movie-details/${movie.id}`}>
+                <Movie key={movie.id} movie={movie} />
+              </Link>
+            </>
           ))}
         </div>
         <MdChevronRight
