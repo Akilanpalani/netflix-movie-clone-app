@@ -12,11 +12,11 @@ const MovieDetails = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        setMovies(data.results);
+        setMovies(data);
         console.log(data.results);
       })
       .catch((err) => console.log('Error: ', err));
-  }, []);
+  }, [id]);
   return (
     <>
       <div className='w-full h-[550px] text-white'>

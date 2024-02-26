@@ -8,13 +8,15 @@ const Main = () => {
   return (
     <div className='w-full h-[550px] text-white'>
       <div className='w-full'>
-        <div className='absolute w-full sm:h-[380px] md:h-[760px] first-letter: bg-gradient-to-r from-black'></div>
-        <img
-          src={banner}
-          alt='Netflix Logo'
-          border='0'
-          className='w-full h-full object-cover'
-        />
+        <div className='absolute w-full sm:h-[480px] md:h-[550px] lg:h-[800px] first-letter: bg-gradient-to-r from-black'></div>
+        <div className='w-full h-[400px] sm:h-full'>
+          <img
+            src={banner}
+            alt='Netflix Logo'
+            border='0'
+            className='w-full h-full object-cover'
+          />
+        </div>
       </div>
       <div className='absolute w-full top-[20%] sm:top-[30%] text-center p-4 md:p-8'>
         <SignUp />
