@@ -15,11 +15,11 @@ const Navbar = () => {
       <div className='flex gap-5'>
         {location.pathname !== '/signin' && (
           <>
-            <Link to='/'>
-              <button className='bg-transparent border border-white text-white px-2 py-1 md:px-4 md:py-2 rounded'>
-                language
-              </button>
-            </Link>
+            {/* <Link to='/'> */}
+            <button className='bg-transparent border border-white text-white px-2 py-1 md:px-4 md:py-2 rounded'>
+              language
+            </button>
+            {/* </Link> */}
             <Link to='/signin'>
               <button className='bg-red-600 text-white px-2 py-1 md:px-4 md:py-2 rounded'>
                 Sign In

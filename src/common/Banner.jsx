@@ -40,12 +40,12 @@ const Banner = () => {
       </div>
       <hr className='h-2 bg-white' />
       {/* Footer Banner */}
-      <div className='p-[150px] sm:invisible md:visible'>
-        <h1 className='text-white font-bold text-2xl md:text-2xl mb-3'>
+      <div className='md:p-[150px] p-[20px]'>
+        <h1 className='text-white font-bold text-sm sm:text-2xl md:text-3xl mb-3'>
           Netflix India
         </h1>
         <div className='flex justify-between'>
-          <div className='text-gray-500 max-w-[500px] underline'>
+          <div className='text-gray-500 max-w-[500px] underline text-sm md:text-xl'>
             <ul className='type-none'>
               <li>Faq</li>
               <li>Investor Relations</li>
@@ -53,7 +53,7 @@ const Banner = () => {
               <li>Speed Test</li>
             </ul>
           </div>
-          <div className='text-gray-500 max-w-[500px] underline'>
+          <div className='text-gray-500 max-w-[500px] underline text-sm md:text-xl'>
             <ul className='type-none'>
               <li>Help Center</li>
               <li>Job Center</li>
@@ -61,7 +61,7 @@ const Banner = () => {
               <li>Legal Noitce</li>
             </ul>
           </div>
-          <div className='text-gray-500 max-w-[500px] underline'>
+          <div className='text-gray-500 max-w-[500px] underline text-sm md:text-xl'>
             <ul className='type-none'>
               <li>Accounts</li>
               <li>Ways to Watch</li>
@@ -69,7 +69,7 @@ const Banner = () => {
               <li>Only on Netflix</li>
             </ul>
           </div>
-          <div className='text-gray-500 max-w-[500px] underline'>
+          <div className='text-gray-500 max-w-[500px] underline text-sm md:text-xl'>
             <ul className='type-none'>
               <li>Media Center</li>
               <li>Terms Of Use</li>

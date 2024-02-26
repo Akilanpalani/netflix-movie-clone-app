@@ -1,12 +1,12 @@
 import React from 'react';
-import Form from './forms/Form';
+import SignUpForm from './forms/SignUpForm';
 
 const SignUp = () => {
   return (
     <div className='w-full'>
       <div className='w-full h-full sm:h-[5px]'>
         <div>
-          <h1 className='sm:text-lg md:text-6xl font-bold'>
+          <h1 className='sm:text-lg md:text-4xl font-bold'>
             Unlimited movies, TV shows and more
           </h1>
           <p className='sm:my-4 text-sm md:text-2xl'>
@@ -16,9 +16,9 @@ const SignUp = () => {
             Ready to watch? Enter your email to watch a latest movies.
           </h3>
         </div>
-        <div className='sm:my-4'>
-          <Form />
-        </div>
+        {/* <div className='sm:my-4'> */}
+        <SignUpForm />
+        {/* </div> */}
       </div>
     </div>
   );

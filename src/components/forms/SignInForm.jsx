@@ -1,0 +1,144 @@
+import React, { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+
+import { setUserDetails } from '../../redux/userSlice';
+const SignInForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // const onSubmit = useCallback(
+  //   (data) => {
+  //     const uniqueId = data.email;
+  //     dispatch(setUserDetails({ ...data, uniqueId }));
+  //     navigate('/home-page');
+  //   },
+  //   [dispatch, navigate]
+  // );
+  const onSubmit = useCallback(
+    async (data) => {
+      console.log('data', data);
+      try {
+        const response = await fetch('http://localhost:5000/api/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+        console.log(data);
+        if (response.status === 201) {
+          dispatch(setUserDetails({ ...data }));
+          navigate('/home-page');
+          console.log('Sign in successful', response);
+        } else {
+          console.error('Failed to sign in');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    },
+    [dispatch, navigate]
+  );
+
+  return (
+    <div className='mx-auto rounded-lg bg-black bg-opacity-[0.7] text-white w-[500px] p-8'>
+      <h1 className='text-3xl font-bold text-start'>Sign In</h1>
+      <form className='p-4' onSubmit={handleSubmit(onSubmit)}>
+        <div className='my-3'>
+          <input
+            type='text'
+            className='p-3 rounded-lg outline-none text-black w-full'
+            placeholder='Username'
+            {...register('userName', {
+              required: 'Enter a valid username',
+            })}
+          />
+          {errors.userName && (
+            <span className='text-red-600'>{errors.userName.message}</span>
+          )}
+        </div>
+        <div className='my-3'>
+          <input
+            type='email'
+            className='p-3 rounded-lg outline-none text-black w-full'
+            placeholder='Email'
+            {...register('email', {
+              required: 'Enter a valid email',
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: 'Enter a valid email',
+              },
+            })}
+          />
+          {errors.email && (
+            <span className='text-red-600'>{errors.email.message}</span>
+          )}
+        </div>
+        <div>
+          <input
+            type='password'
+            className='p-3 rounded-lg outline-none text-black w-full'
+            placeholder='Password'
+            {...register('password', {
+              required: 'Enter a valid password',
+            })}
+          />
+          {errors.password && (
+            <span className='text-red-600'>{errors.password.message}</span>
+          )}
+        </div>
+        <div className='my-3'>
+          <button
+            type='submit'
+            placeholder='Password'
+            className={`p-3 rounded-lg outline-none text-white bg-red-600 w-full my-3 hover:cursor-pointer ${
+              errors.email || errors.password ? 'opacity-50' : 'cursor-auto'
+            }`}
+            disabled={errors.email || errors.password}
+          >
+            Sign In
+          </button>
+        </div>
+        <div className='flex justify-between'>
+          <div className='flex items-center'>
+            <input type='checkbox' onChange={() => {}} checked />
+            <label className='ml-2'>Remember Me</label>
+          </div>
+          <div className='text-red-600'>
+            <a href='/'>Need Help?</a>
+          </div>
+        </div>
+      </form>
+      <div className='flex flex-col items-start ml-4 mt-16'>
+        <div className='flex items-start'>
+          <p>
+            New to Netflix?{' '}
+            <a href='/' className='text-red-600 hover:text-white underline'>
+              Sign Up Now
+            </a>
+          </p>
+        </div>
+        <div className='flex items-start'>
+          <p>
+            This page is protected by Google reCAPTCHA to ensure you're not a
+            bot.
+            <a href='/' className='text-blue-600 hover:text-white underline'>
+              {' '}
+              Learn more
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SignInForm;
