@@ -8,12 +8,12 @@ const SignIn = () => {
     <div className='w-full h-[550px] text-white'>
       <div className='w-full'>
         <div className='absolute w-full sm:h-[900px] bg-gradient-to-r from-black'></div>
-        <div className='hidden sm:inline-block h-[900px]'>
+        <div className='w-full h-[400px] sm:h-[900px]'>
           <img
             src={banner}
             alt='Netflix Logo'
             border='0'
-            className='w-full h-full object-cover'
+            className='w-full h-[960px] sm:h-full object-cover'
           />
         </div>
       </div>

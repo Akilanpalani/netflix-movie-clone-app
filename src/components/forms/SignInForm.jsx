@@ -14,28 +14,22 @@ const SignInForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const onSubmit = useCallback(
-  //   (data) => {
-  //     const uniqueId = data.email;
-  //     dispatch(setUserDetails({ ...data, uniqueId }));
-  //     navigate('/home-page');
-  //   },
-  //   [dispatch, navigate]
-  // );
   const onSubmit = useCallback(
     async (data) => {
       console.log('data', data);
       try {
-        const response = await fetch('http://localhost:5000/api/register', {
+        const response = await fetch('http://localhost:5000/api/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data),
         });
+        console.log('data', data);
         console.log(data);
-        if (response.status === 201) {
-          dispatch(setUserDetails({ ...data }));
+        if (response.status === 200) {
+          const userData = await response.json();
+          dispatch(setUserDetails(userData.data));
           navigate('/home-page');
           console.log('Sign in successful', response);
         } else {
@@ -49,22 +43,9 @@ const SignInForm = () => {
   );
 
   return (
-    <div className='mx-auto rounded-lg bg-black bg-opacity-[0.7] text-white w-[500px] p-8'>
+    <div className='mx-auto rounded-lg bg-black bg-opacity-[0.7] text-white md:w-[500px] p-8'>
       <h1 className='text-3xl font-bold text-start'>Sign In</h1>
       <form className='p-4' onSubmit={handleSubmit(onSubmit)}>
-        <div className='my-3'>
-          <input
-            type='text'
-            className='p-3 rounded-lg outline-none text-black w-full'
-            placeholder='Username'
-            {...register('userName', {
-              required: 'Enter a valid username',
-            })}
-          />
-          {errors.userName && (
-            <span className='text-red-600'>{errors.userName.message}</span>
-          )}
-        </div>
         <div className='my-3'>
           <input
             type='email'
