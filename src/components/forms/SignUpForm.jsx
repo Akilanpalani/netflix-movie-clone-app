@@ -16,9 +16,11 @@ const Form = () => {
   const dispatch = useDispatch();
 
   const onSubmit = useCallback(
-    (data) => {
+    async (data) => {
       dispatch(setUserDetails(data));
-      navigate('/home-page');
+      navigate('/signup', {
+        state: { email: data.email },
+      }); // sending the email to store in db
     },
     [dispatch, navigate]
   );
