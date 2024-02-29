@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Loader from '../common/Loader';
 
 const MovieDetails = () => {
   const { id } = useParams();
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
   const key = '8085c9023af895ec062417662f953e0e';
 
   useEffect(() => {
@@ -13,10 +15,17 @@ const MovieDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         setMovies(data);
-        console.log(data.results);
+        setLoading(false);
       })
-      .catch((err) => console.log('Error: ', err));
+      .catch((err) => {
+        console.log('Error: ', err);
+        setLoading(false);
+      });
   }, [id]);
+
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <>
       <div className='w-full h-[550px] text-white'>

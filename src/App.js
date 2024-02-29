@@ -14,6 +14,7 @@ import SignIn from './components/SignIn';
 import MainHome from './pages/MainHome';
 import MovieDetails from './pages/MovieDetails';
 import SignupStepper from './pages/SignupStepper';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
@@ -30,6 +31,7 @@ function App() {
           />
           <Route path={'/movie-details/:id'} element={<MovieDetails />} />
           <Route path='/signup' element={<SignupStepper />} />
+          <Route path='/profile' element={<ProfilePage />} />
         </Routes>
       </Router>
     </>
