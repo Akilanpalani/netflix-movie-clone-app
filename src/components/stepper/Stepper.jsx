@@ -25,18 +25,12 @@ const Stepper = () => {
   const [planForm, setPlanForm] = useState({
     selectedPlan: '',
   });
-  const [showPlanSelection, setShowPlanSelection] = useState(false);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
 
   const handleNext = async () => {
     const isValid = await trigger();
     if (isValid) {
-      if (
-        activeStep === 2 &&
-        showPlanSelection &&
-        planForm.selectedPlan === ''
-      ) {
-        setShowPlanSelection(false);
+      if (activeStep === 2 && planForm.selectedPlan === '') {
         alert('Please select a plan');
       } else {
         setActiveStep((prevStep) => prevStep + 1);
@@ -46,9 +40,6 @@ const Stepper = () => {
 
   const handlePrev = () => {
     setActiveStep((prevStep) => prevStep - 1);
-    if (activeStep === 2 && showPlanSelection) {
-      setShowPlanSelection(true);
-    }
   };
   const handleChange = (name, value) => {
     setFormData((prevData) => ({
@@ -122,6 +113,7 @@ const Stepper = () => {
               <div className='my-3 flex flex-col'>
                 <label className='text-lg font-semibold'>Password</label>
                 <Controller
+                  className='p-2 sm:p-3 opacity-[0.7] bg-white outline-none'
                   name='password'
                   control={control}
                   render={({ field }) => (
@@ -218,6 +210,9 @@ const Stepper = () => {
                 </div>
               </div>
             </div>
+            {errors.selectedPlan && (
+              <p className='text-red-500'>{errors.selectedPlan.message}</p>
+            )}
             {/* )} */}
           </div>
         );
@@ -232,7 +227,6 @@ const Stepper = () => {
             <div className='flex justify-center'>
               <button
                 onClick={() => handleChange('paymentMethod', 'Card')}
-                name='paymentPicker'
                 className={`bg-transparent border border-white text-black px-5 py-2 ${
                   selectedPaymentMethod === 'Card' ? 'bg-green-600' : ''
                 }`}
@@ -241,13 +235,15 @@ const Stepper = () => {
               </button>
               <button
                 onClick={() => handleChange('paymentMethod', 'UPI')}
-                name='paymentPicker'
                 className={`bg-transparent border border-white text-black px-5 py-2 ml-5 ${
                   selectedPaymentMethod === 'UPI' ? 'bg-green-600' : ''
                 }`}
               >
                 UPI
               </button>
+              {errors.paymentMethod && (
+                <p className='text-red-500'>{errors.paymentMethod.message}</p>
+              )}
             </div>
           </div>
         );

@@ -14,7 +14,9 @@ const useSlice = createSlice({
     login: (state, action) => {
       state.userDetails = action.payload;
     },
-    logout: (state) => {
+    logout: (state, action) => {
+      state.userDetails = action.payload;
+      state.isAuthenticated = false;
       state.userDetails = null;
     },
   },
