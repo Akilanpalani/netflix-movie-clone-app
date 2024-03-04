@@ -27,6 +27,7 @@ const SignInForm = () => {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
+            mode: 'cors',
           }
         );
         console.log('data', data);
