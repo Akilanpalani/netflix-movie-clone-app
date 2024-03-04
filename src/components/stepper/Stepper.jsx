@@ -86,7 +86,7 @@ const Stepper = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(dataToSend),
-          mode: 'cors',
+          mode: 'no-cors',
         }
       );
 
