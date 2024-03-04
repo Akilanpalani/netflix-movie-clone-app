@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
+import Swal from 'sweetalert2';
 
 const Stepper = () => {
   const navigate = useNavigate();
@@ -31,7 +32,11 @@ const Stepper = () => {
     const isValid = await trigger();
     if (isValid) {
       if (activeStep === 2 && planForm.selectedPlan === '') {
-        alert('Please select a plan');
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Please select a plan',
+        });
       } else {
         setActiveStep((prevStep) => prevStep + 1);
       }
@@ -51,6 +56,11 @@ const Stepper = () => {
         ...prevData,
         paymentMethod: value,
       }));
+      Swal.fire({
+        icon: 'success',
+        title: 'Payment Method Selected',
+        text: 'You have successfully selected payment method',
+      });
       setSelectedPaymentMethod(value);
     } else if (name === 'password') {
       setFormData((prevData) => ({
@@ -79,11 +89,24 @@ const Stepper = () => {
       if (resposne.status === 201) {
         console.log('Data Sent Successful', dataToSend);
         navigate('/home-page');
+        Swal.fire({
+          icon: 'success',
+          title: 'Sign Up Successful',
+          text: 'You have successfully signed up',
+        });
       } else {
-        console.error('Failed to sign in');
+        Swal.fire({
+          icon: 'error',
+          title: 'Sign Up Failed',
+          text: 'Please enter a valid details',
+        });
       }
     } catch (error) {
-      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Sign Up Failed',
+        text: 'Please enter a valid details',
+      });
     }
   };
 
@@ -153,13 +176,6 @@ const Stepper = () => {
               Step {activeStep} of {totalSteps}
             </p>
             <h1 className='text-3xl font-bold'>Choose Your Plan</h1>
-            {/* {showPlanSelection ? (
-              <div className='text-start text-xl'>
-                <p>No Commitments. Cancel at any time.</p>
-                <p>What would you like to watch?</p>
-                <p>No adds or extra fees. 100% hassle free.</p>
-              </div>
-            ) : ( */}
             <div className='my-3 flex flex-col sm:flex-row items-center gap-5 text-white text-center'>
               {/* Card 1 */}
               <div
@@ -213,7 +229,6 @@ const Stepper = () => {
             {errors.selectedPlan && (
               <p className='text-red-500'>{errors.selectedPlan.message}</p>
             )}
-            {/* )} */}
           </div>
         );
       case 3:
