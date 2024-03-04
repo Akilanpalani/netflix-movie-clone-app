@@ -78,13 +78,16 @@ const Stepper = () => {
         email,
       };
 
-      const resposne = await fetch('http://localhost:5000/api/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dataToSend),
-      });
+      const resposne = await fetch(
+        'https://netflix-nucleus.netlify.app/api/register',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(dataToSend),
+        }
+      );
 
       if (resposne.status === 201) {
         console.log('Data Sent Successful', dataToSend);
