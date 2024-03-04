@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
 
 import { setUserDetails } from '../../redux/userSlice';
 const SignInForm = () => {
@@ -30,12 +31,26 @@ const SignInForm = () => {
         if (response.status === 200) {
           const userData = await response.json();
           dispatch(setUserDetails(userData.data));
+          Swal.fire({
+            icon: 'success',
+            title: 'Sign In Successful',
+            text: 'You have successfully signed in',
+          });
           navigate('/home-page');
-          console.log('Sign in successful', response);
         } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Sign In Failed',
+            text: 'Please check your email and password and try again',
+          });
           console.error('Failed to sign in');
         }
       } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Sign In Failed',
+          text: 'An unexpected error occurred. Please try again later.',
+        });
         console.error('Error:', error);
       }
     },

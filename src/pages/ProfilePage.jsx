@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 
 import { selectUserDetails, logout } from '../redux/userSlice';
 
@@ -11,6 +12,11 @@ const ProfilePage = () => {
 
   const handleLogout = () => {
     dispatch(logout());
+    Swal.fire({
+      icon: 'success',
+      title: 'Logout Successful',
+      text: 'You have successfully logged out',
+    });
     navigate('/signin');
   };
 
