@@ -86,7 +86,6 @@ const Stepper = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(dataToSend),
-          mode: 'no-cors',
         }
       );
 
@@ -108,8 +107,8 @@ const Stepper = () => {
     } catch (error) {
       Swal.fire({
         icon: 'error',
-        title: 'Sign Up Failed',
-        text: 'Please enter a valid details',
+        title: 'Oops...',
+        text: 'Something went wrong',
       });
     }
   };
