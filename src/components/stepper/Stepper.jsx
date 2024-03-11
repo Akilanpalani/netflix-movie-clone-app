@@ -79,7 +79,7 @@ const Stepper = () => {
       };
 
       const resposne = await fetch(
-        'https://netflix-nucleus.netlify.app/api/users/register',
+        'https://movies-nucleus.netlify.app/api/users/register',
         {
           method: 'POST',
           headers: {

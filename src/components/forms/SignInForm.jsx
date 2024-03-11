@@ -20,14 +20,13 @@ const SignInForm = () => {
       console.log('data', data);
       try {
         const response = await fetch(
-          'https://netflix-nucleus.netlify.app/api/auth/login',
+          'https://movies-nucleus.netlify.app/api/auth/login',
           {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
-            mode: 'no-cors',
           }
         );
         console.log('data', data);
