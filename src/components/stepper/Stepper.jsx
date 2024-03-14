@@ -4,6 +4,10 @@ import { useForm, Controller } from 'react-hook-form';
 import Swal from 'sweetalert2';
 
 const Stepper = () => {
+  const apiUrl =
+    process.env.REACT_APP_SIGN_UP_API_URL ||
+    'http://localhost:5000/api/users/register';
+
   const navigate = useNavigate();
   const location = useLocation();
   const email = location.state.email; // get the email from the previous page
@@ -78,16 +82,13 @@ const Stepper = () => {
         email,
       };
 
-      const resposne = await fetch(
-        'https://movies-nucleus.netlify.app/api/users/register',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(dataToSend),
-        }
-      );
+      const resposne = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataToSend),
+      });
 
       if (resposne.status === 201) {
         console.log('Data Sent Successful', dataToSend);
@@ -98,10 +99,11 @@ const Stepper = () => {
           text: 'You have successfully signed up',
         });
       } else {
+        const errorData = await resposne.json();
         Swal.fire({
           icon: 'error',
           title: 'Sign Up Failed',
-          text: 'Please enter a valid details',
+          text: errorData || 'Please enter a valid details',
         });
       }
     } catch (error) {
