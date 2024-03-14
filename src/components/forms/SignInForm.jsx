@@ -12,6 +12,10 @@ const SignInForm = () => {
     formState: { errors },
   } = useForm();
 
+  const apiUrl =
+    process.env.REACT_APP_SIGN_IN_API_URL ||
+    'http://localhost:5000/api/auth/login';
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -19,18 +23,13 @@ const SignInForm = () => {
     async (data) => {
       console.log('data', data);
       try {
-        const response = await fetch(
-          'https://movies-nucleus.netlify.app/api/auth/login',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          }
-        );
-        console.log('data', data);
-        console.log(data);
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
         if (response.status === 200) {
           const userData = await response.json();
           dispatch(setUserDetails(userData.data));
@@ -41,10 +40,12 @@ const SignInForm = () => {
           });
           navigate('/home-page');
         } else {
+          const errorData = await response.json();
           Swal.fire({
             icon: 'error',
             title: 'Sign In Failed',
-            text: 'Please check your email and password and try again',
+            text:
+              errorData || 'Please check your email and password and try again',
           });
           console.error('Failed to sign in');
         }
@@ -57,7 +58,7 @@ const SignInForm = () => {
         console.error('Error:', error);
       }
     },
-    [dispatch, navigate]
+    [dispatch, navigate, apiUrl]
   );
 
   return (
