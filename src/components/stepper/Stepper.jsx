@@ -4,9 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import Swal from 'sweetalert2';
 
 const Stepper = () => {
-  const apiUrl =
-    process.env.REACT_APP_SIGN_UP_API_URL ||
-    'http://localhost:5000/api/users/register';
+  const apiUrl = process.env.REACT_APP_SIGN_UP_API_URL || '';
 
   const navigate = useNavigate();
   const location = useLocation();
