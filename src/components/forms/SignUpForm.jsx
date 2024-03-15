@@ -16,7 +16,7 @@ const Form = () => {
   const dispatch = useDispatch();
 
   const onSubmit = useCallback(
-    async (data) => {
+    (data) => {
       dispatch(setUserDetails(data));
       navigate('/signup', {
         state: { email: data.email },

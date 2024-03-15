@@ -12,9 +12,7 @@ const SignInForm = () => {
     formState: { errors },
   } = useForm();
 
-  const apiUrl =
-    process.env.REACT_APP_SIGN_IN_API_URL ||
-    'http://localhost:5000/api/auth/login';
+  const apiUrl = process.env.REACT_APP_SIGN_IN_API_URL;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
