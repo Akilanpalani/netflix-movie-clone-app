@@ -113,3 +113,4 @@ jobs:
             curl -X POST "${{ secrets.GOOGLE_CHAT_WEBHOOK }}" \
             -H "Content-Type: application/json" \
             -d "$CARD_JSON"
+            
